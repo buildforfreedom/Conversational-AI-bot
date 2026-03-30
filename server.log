@@ -1,0 +1,6 @@
+::1 - - [31/Mar/2026 00:55:56] "GET / HTTP/1.1" 200 -
+::1 - - [31/Mar/2026 00:55:56] "GET /styles.css HTTP/1.1" 200 -
+::1 - - [31/Mar/2026 00:55:56] "GET /script.js HTTP/1.1" 200 -
+::1 - - [31/Mar/2026 00:55:56] "GET /assets/hero_bg.png HTTP/1.1" 200 -
+::1 - - [31/Mar/2026 00:55:56] code 404, message File not found
+::1 - - [31/Mar/2026 00:55:56] "GET /favicon.ico HTTP/1.1" 404 -
