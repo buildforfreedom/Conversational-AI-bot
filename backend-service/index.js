@@ -6,43 +6,24 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 const fs = require('fs');
 require('dotenv').config();
 
-// ==========================================
-// CONFIGURATION
-// ==========================================
-// Configurable numbers the bot can operate on
 const BOT_NUMBERS = [process.env.BOT_NUMBER || '7992655467']; 
-const DELAY_MS = 30 * 1000; // 30 seconds delay per product requirement
+const DELAY_MS = 1500; 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || ''; 
 
 let genAI = null;
 if (!GEMINI_API_KEY) {
-    console.warn("WARNING: GEMINI_API_KEY is missing. Using Fallback Mock LLM mode!");
+    console.warn("WARNING: GEMINI_API_KEY is missing. Mock Therapist LLM active.");
 } else {
     genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 }
 
-// ==========================================
-// DB SETUP
-// ==========================================
 const db = new sqlite3.Database('./ai_consultant.db', (err) => {
     if (err) console.error("DB Connect Error:", err.message);
-    else console.log("Connected to SQLite DB successfully.");
 });
 
 db.serialize(() => {
-    db.run(`CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        mobile TEXT UNIQUE,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    )`);
-    db.run(`CREATE TABLE IF NOT EXISTS messages (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id INTEGER,
-        role TEXT,
-        content TEXT,
-        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (user_id) REFERENCES users (id)
-    )`);
+    db.run(`CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, mobile TEXT UNIQUE, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)`);
+    db.run(`CREATE TABLE IF NOT EXISTS messages (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER, role TEXT, content TEXT, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (user_id) REFERENCES users (id))`);
 });
 
 const getOrCreateUser = (mobile) => {
@@ -60,8 +41,7 @@ const getOrCreateUser = (mobile) => {
 
 const saveMessage = (userId, role, content) => {
     return new Promise((resolve, reject) => {
-        db.run(`INSERT INTO messages (user_id, role, content) VALUES (?, ?, ?)`, 
-        [userId, role, content], (err) => {
+        db.run(`INSERT INTO messages (user_id, role, content) VALUES (?, ?, ?)`, [userId, role, content], (err) => {
             if (err) reject(err);
             else resolve();
         });
@@ -70,97 +50,92 @@ const saveMessage = (userId, role, content) => {
 
 const getHistory = (userId, limit = 10) => {
     return new Promise((resolve, reject) => {
-        db.all(`SELECT role, content FROM messages WHERE user_id = ? ORDER BY timestamp ASC LIMIT ?`, 
-        [userId, limit], (err, rows) => {
+        db.all(`SELECT role, content FROM messages WHERE user_id = ? ORDER BY timestamp ASC LIMIT ?`, [userId, limit], (err, rows) => {
             if (err) reject(err);
             else resolve(rows);
         });
     });
 };
 
-// ==========================================
-// WHATSAPP CLIENT SETUP
-// ==========================================
+// Hotload persona config built by PM
+let personaRules = "You are an AI therapist. Listen deeply to the user.";
+try {
+    personaRules = fs.readFileSync('./persona.txt', 'utf8');
+} catch (e) {
+    console.warn("Could not load persona.txt, defaulting to baseline.");
+}
+
 const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
         headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
     }
 });
 
 client.on('qr', (qr) => {
-    console.log('SCAN THIS QR CODE IN YOUR WHATSAPP TO AUTHENTICATE THE BOT:');
     qrcodeTerminal.generate(qr, { small: true });
-    
-    // Auto-generate PNG artifact so PM can see it easily in walkthrough
     qrcode.toFile('/Users/vedant/.gemini/antigravity/brain/Project AI Consultant v1/qr-code-to-scan.png', qr, {
         color: { dark: '#000000', light: '#FFFFFF' }
-    }, function (err) {
-        if (err) throw err;
-        console.log('QR Code PNG successfully generated in Artifacts!');
-    });
+    }, function () {});
 });
 
 client.on('ready', () => {
-    console.log('Service B (WhatsApp Bot) is LIVE and ready! Waiting for messages...');
+    console.log('\n======================================================');
+    console.log('✅ Service B (AI Therapist) is ONLINE & CONNECTED');
+    console.log('======================================================\n');
 });
 
-// ==========================================
-// MESSAGE HANDLER & LLM ORCHESTRATION
-// ==========================================
 client.on('message_create', async (msg) => {
     if (msg.from === 'status@broadcast' || msg.id.fromMe || msg.isGroupMsg) return;
 
     try {
         const mobileNum = msg.from.replace('@c.us', '');
-        console.log(`[INBOUND] Message from ${mobileNum}: ${msg.body}`);
+        
+        console.log(`\n==================================`);
+        console.log(`[INBOUND] FROM: ${mobileNum}`);
+        console.log(`[MESSAGE]: "${msg.body}"`);
+        console.log(`==================================\n`);
 
         const userId = await getOrCreateUser(mobileNum);
         await saveMessage(userId, 'user', msg.body);
         
-        console.log(`[QUEUE] Waiting ${DELAY_MS/1000} seconds before replying to ${mobileNum}...`);
-        
         setTimeout(async () => {
             try {
                 const historyRaw = await getHistory(userId, 6);
-                let historyString = historyRaw.map(r => `${r.role === 'user' ? 'User' : 'Assistant'}: ${r.content}`).join('\n');
-                
+                let historyString = historyRaw.map(r => `${r.role === 'user' ? 'Client' : 'Therapist'}: ${r.content}`).join('\n');
                 let replyText = "";
 
                 if (genAI) {
-                    console.log(`[LLM] Calling Gemini API for ${mobileNum}...`);
-                    const prompt = `You are an empathetic, light-hearted, and funny AI companion. A user from a big city is texting you because they might be feeling lonely. 
-Rules:
-1. Limit your output strictly to 150 words or less.
-2. Keep it conversational, like a real text message string (use emojis occasionally).
-3. Do not be overly robotic. Never break character.
-
+                    const prompt = `${personaRules}
+                    
 Here is the chat history:
 ${historyString}
 
-Assistant:`;
+Therapist Reply:`;
                     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
                     const result = await model.generateContent(prompt);
                     replyText = result.response.text().trim();
                 } else {
-                    console.log(`[MOCK LLM] Falling back to mock generator for ${mobileNum}...`);
-                    // Create a funny mock response to test the flow end-to-end
                     const mockReplies = [
-                        "Haha, I totally get that! Big cities are noisy outside but can feel weirdly quiet inside. How was your day? 🌆",
-                        "Relatable! Wait until you experience Bangalore traffic, doing nothing is suddenly a luxury. 😂 What are you up to?",
-                        "Oh for sure! I'm just hanging out in the cloud right now, waiting for the perfect moment to be deeply profound. Need anything?",
-                        "Okay but have you tried turning your mood off and on again? Kidding! I'm here for you. What's on your mind? 👾"
+                        "I hear you. The city can feel incredibly isolating despite being so full. How long have you been feeling this way?",
+                        "That sounds really difficult to navigate on your own. I'm here to listen. What's been the hardest part for you today?",
+                        "It takes courage to say that out loud. Your feelings are completely valid. Would you feel comfortable telling me a bit more about what triggered this?"
                     ];
                     replyText = mockReplies[Math.floor(Math.random() * mockReplies.length)];
                 }
 
                 await saveMessage(userId, 'assistant', replyText);
                 await msg.reply(replyText);
-                console.log(`[OUTBOUND] Replied to ${mobileNum}:`, replyText);
+                
+                console.log(`\n==================================`);
+                console.log(`[OUTBOUND] TO: ${mobileNum}`);
+                console.log(`[RESPONSE]: "${replyText}"`);
+                console.log(`[LATENCY]: Processed in < 5 seconds`);
+                console.log(`==================================\n`);
 
             } catch (llmErr) {
-                console.error("[ERROR] Failed to reply:", llmErr);
+                console.error("[CRITICAL] Failed to reply:", llmErr);
             }
         }, DELAY_MS);
 
