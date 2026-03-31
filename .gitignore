@@ -1,0 +1,8 @@
+node_modules/
+.env
+*.db
+.wwebjs_auth/
+.DS_Store
+*.log
+qr-code-to-scan.png
+.vault.enc
