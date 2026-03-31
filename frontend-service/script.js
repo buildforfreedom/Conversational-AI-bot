@@ -58,3 +58,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+
+/* --- FAQ ACCORDION LOGIC --- */
+document.addEventListener('DOMContentLoaded', () => {
+    const faqs = document.querySelectorAll('.faq-question');
+    faqs.forEach(faq => {
+        faq.addEventListener('click', () => {
+            // Close other open faqs for accordion effect
+            const activeFaq = document.querySelector('.faq-item.active');
+            if (activeFaq && activeFaq !== faq.parentElement) {
+                activeFaq.classList.remove('active');
+            }
+            // Toggle current
+            faq.parentElement.classList.toggle('active');
+        });
+    });
+});
