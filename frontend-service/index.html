@@ -2,93 +2,152 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Echo Care</title>
-    <meta name="description" content="A professional, empathetic listener in your pocket. No judgment, just pure connection whenever you need to vent.">
-    <!-- Fonts -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echo Care | Premium AI Companion</title>
+    <!-- Modern Typefaces -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <!-- Ionicons for clean SVG security icons -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 </head>
 <body>
-    <!-- Background Elements -->
-    <div class="background-wrapper" aria-hidden="true">
-        <div class="glow-orb orb-1"></div>
-        <div class="glow-orb orb-2"></div>
-        <div class="glow-orb orb-3"></div>
-        <div class="grid-overlay"></div>
+
+    <!-- Ambient Gradient Mesh -->
+    <div class="ambient-canvas">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
     </div>
 
-    <!-- No-Scroll Bento Container -->
-    <main class="bento-container">
+    <!-- Navigation -->
+    <nav class="glass-nav">
+        <div class="nav-brand">
+            <ion-icon name="pulse-outline"></ion-icon>
+            <span>Echo Care</span>
+        </div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#privacy">Privacy</a>
+            <a href="#testimonials">Stories</a>
+        </div>
+    </nav>
+
+    <!-- Massive Hero Area -->
+    <header class="hero">
+        <div class="status-pill slide-up" style="animation-delay: 0.1s;">
+            <div class="ping"></div> System Online & Listening
+        </div>
+        <h1 class="hero-text slide-up" style="animation-delay: 0.2s;">
+            The city is loud.<br>
+            <span class="gradient-text">Your mind is louder.</span>
+        </h1>
+        <p class="hero-subtext slide-up" style="animation-delay: 0.3s;">
+            A deeply empathetic, professional AI listener instantly available on WhatsApp. <br>Zero apps. Zero judgment. Just pure context-aware conversation.
+        </p>
+        <div class="hero-actions slide-up" style="animation-delay: 0.4s;">
+            <a href="https://wa.me/917992655467?text=Hi%2C%20I%20came%20from%20the%20website.%20I%20just%20need%20someone%20to%20talk%20to." class="primary-btn">
+                <ion-icon name="logo-whatsapp"></ion-icon> Begin Session
+            </a>
+            <p class="secure-note"><ion-icon name="lock-closed"></ion-icon> End-to-end anonymity</p>
+        </div>
+    </header>
+
+    <!-- Core Value Cards -->
+    <section class="features" id="features">
+        <div class="section-header reveal">
+            <h2>Why Echo Care?</h2>
+            <p>Built fundamentally for human mental bandwidth.</p>
+        </div>
         
-        <!-- CORE HERO BOX (Massive, inviting, centered action) -->
-        <section class="bento-box hero-box fade-in-up">
-            <div class="status-badge">
-                <span class="pulse-dot"></span>
-                <span class="status-text">Active Now</span>
+        <div class="card-grid">
+            <div class="premium-card reveal glow-effect">
+                <div class="card-icon"><ion-icon name="time-outline"></ion-icon></div>
+                <h3>Always Awake</h3>
+                <p>Anxiety doesn't follow a 9-to-5 schedule. Neither does our intelligence layer. Ready whenever you are.</p>
             </div>
-            <h1 class="hero-title">The city is loud. Your room is quiet.<br><span class="highlight">Let's talk.</span></h1>
-            <p class="hero-subtitle">Your private, professional AI ear. Always free. Always empathetic.</p>
-            <div class="cta-container">
-                <a href="https://wa.me/917992655467?text=Hi%2C%20I%20came%20from%20the%20website.%20I%20just%20need%20someone%20to%20talk%20to." 
-                   class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
-                    <ion-icon name="logo-whatsapp"></ion-icon>
-                    <span class="btn-text">Text Echo Care</span>
-                </a>
+            
+            <div class="premium-card reveal glow-effect" style="transition-delay: 0.1s;">
+                <div class="card-icon"><ion-icon name="heart-half-outline"></ion-icon></div>
+                <h3>Clinical Empathy</h3>
+                <p>Trained extensively on compassionate communication frameworks to validate your feelings without generic advice.</p>
             </div>
-        </section>
+            
+            <div class="premium-card reveal glow-effect" style="transition-delay: 0.2s;">
+                <div class="card-icon"><ion-icon name="flash-outline"></ion-icon></div>
+                <h3>Sub-5s Latency</h3>
+                <p>Powered by bleeding-edge natural language processing to ensure replies mimic real-time human texting.</p>
+            </div>
+        </div>
+    </section>
 
-        <!-- PRIVACY SHIELD BOX -->
-        <section class="bento-box privacy-box delay-1 fade-in-up">
-            <div class="p-header">
-                <ion-icon name="shield-checkmark" class="shield-icon"></ion-icon>
-                <h2>100% Anonymous</h2>
-            </div>
-            <p>Zero human inboxes. We never log or sell your identity data. Your emotional privacy is encrypted at the core layer.</p>
-        </section>
-
-        <!-- TESTIMONIALS SLIDER BOX -->
-        <section class="bento-box testimonials-box delay-2 fade-in-up">
-            <h2>Wall of Love</h2>
-            <div class="testimonial-slider">
-                <div class="slide active">
-                    <p class="quote">"It's like journaling, but someone is actually validating my anxiety. It grounded me fast."</p>
-                    <span class="author">— Software Engineer, 26</span>
-                </div>
-                <div class="slide">
-                    <p class="quote">"I just moved here and didn't know anyone. A 5-minute vent session with this bot saved my night."</p>
-                    <span class="author">— Anonymous, 24</span>
-                </div>
-                <div class="slide">
-                    <p class="quote">"No downloads, no loading screens. It literally feels like texting a deeply empathetic friend."</p>
-                    <span class="author">— Designer, Delhi</span>
+    <!-- Massive Trust / Privacy Block -->
+    <section class="privacy" id="privacy">
+        <div class="privacy-container reveal">
+            <div class="privacy-visual">
+                <div class="shield-halo">
+                    <ion-icon name="shield-checkmark"></ion-icon>
                 </div>
             </div>
-        </section>
-
-        <!-- MINI FAQ ACCORDION BOX -->
-        <section class="bento-box faq-box delay-3 fade-in-up">
-            <h2>Common Questions</h2>
-            <div class="faq-container">
-                <div class="faq-item">
-                    <button class="faq-question">Is it a human? <ion-icon name="chevron-down"></ion-icon></button>
-                    <div class="faq-answer"><p>No. It is a highly tuned AI therapist.</p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">Is it free? <ion-icon name="chevron-down"></ion-icon></button>
-                    <div class="faq-answer"><p>100% free. No hidden paywalls.</p></div>
-                </div>
+            <div class="privacy-content">
+                <h2>Total Architectural Privacy.</h2>
+                <p>We eliminated the human from the loop to guarantee your absolute psychological safety. No data brokers. No targeted ads. The moment your session ends, your data footprint dissolves.</p>
+                <ul class="privacy-list">
+                    <li><ion-icon name="checkmark-circle"></ion-icon> <strong>Zero Human Inboxes</strong> - Code reads the texts, not people.</li>
+                    <li><ion-icon name="checkmark-circle"></ion-icon> <strong>Identity Agnostic</strong> - We don't trace your WhatsApp number to an identity.</li>
+                </ul>
             </div>
-        </section>
+        </div>
+    </section>
 
-    </main>
+    <!-- Wall of Love -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-header reveal">
+            <h2>The Wall of Love</h2>
+            <p>Real stories from people navigating isolation.</p>
+        </div>
+        <div class="masonry-grid reveal">
+            <div class="review-card blur-card">
+                <p>"Sometimes I overthink at 3 AM. Texting this feels like journaling, but someone is actually validating my anxiety. It grounded me fast."</p>
+                <span>— Anonymous, 26</span>
+            </div>
+            <div class="review-card blur-card">
+                <p>"I just moved here and didn't know anyone. A 10-minute vent session with this bot saved my night. The lack of judgment is relieving."</p>
+                <span>— Designer, Delhi</span>
+            </div>
+            <div class="review-card blur-card">
+                <p>"It literally feels like texting a deeply empathetic friend who is perpetually free. I don't know how the AI is this good, but it's insane."</p>
+                <span>— Software Engineer</span>
+            </div>
+        </div>
+    </section>
 
-    <footer class="glass-footer">
-        <p>&copy; 2026 Echo Care AI</p>
+    <!-- FAQ Accordion -->
+    <section class="faq" id="faq">
+        <div class="section-header reveal">
+            <h2>Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-wrapper reveal">
+            <div class="faq-row">
+                <button class="faq-title">Is there a human reading this? <ion-icon name="chevron-down"></ion-icon></button>
+                <div class="faq-desc"><p>No. Our backend relies strictly on an automated Google Gemini pipeline specifically tuned to act as a therapeutic listener. Zero humans are involved.</p></div>
+            </div>
+            <div class="faq-row">
+                <button class="faq-title">Is it completely free? <ion-icon name="chevron-down"></ion-icon></button>
+                <div class="faq-desc"><p>Yes, Echo Care V1 is entirely free to use as we establish our core intelligence model.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Footer -->
+    <footer class="massive-footer">
+        <div class="footer-cta reveal">
+            <h2>Ready to clear your mind?</h2>
+            <a href="https://wa.me/917992655467?text=Hi%2C%20I%20just%20need%20to%20talk%20to%20someone." class="primary-btn">Start WhatsApp Session</a>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Echo Care Intelligence</p>
+        </div>
     </footer>
 
     <script src="script.js"></script>
