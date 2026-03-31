@@ -2,24 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Echo Care | Your Modern AI Therapist</title>
-    <meta name="description" content="Feeling isolated? We match you with an AI companion to talk to anytime, right on WhatsApp. 100% private.">
-    
-    <meta property="og:title" content="The city is loud. Your room is quiet. Let's talk.">
-    <meta property="og:description" content="An always-there professional listener for when you just need to vent.">
-    <meta property="og:type" content="website">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Echo Care</title>
+    <meta name="description" content="A professional, empathetic listener in your pocket. No judgment, just pure connection whenever you need to vent.">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="styles.css">
     <!-- Ionicons for clean SVG security icons -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 </head>
 <body>
+    <!-- Background Elements -->
     <div class="background-wrapper" aria-hidden="true">
         <div class="glow-orb orb-1"></div>
         <div class="glow-orb orb-2"></div>
@@ -27,152 +22,73 @@
         <div class="grid-overlay"></div>
     </div>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero-section" id="hook">
-            <div class="glass-card main-hero-card fade-in-up">
-                <div class="status-badge">
-                    <span class="pulse-dot"></span>
-                    <span class="status-text">Available 24/7</span>
+    <!-- No-Scroll Bento Container -->
+    <main class="bento-container">
+        
+        <!-- CORE HERO BOX (Massive, inviting, centered action) -->
+        <section class="bento-box hero-box fade-in-up">
+            <div class="status-badge">
+                <span class="pulse-dot"></span>
+                <span class="status-text">Active Now</span>
+            </div>
+            <h1 class="hero-title">The city is loud. Your room is quiet.<br><span class="highlight">Let's talk.</span></h1>
+            <p class="hero-subtitle">Your private, professional AI ear. Always free. Always empathetic.</p>
+            <div class="cta-container">
+                <a href="https://wa.me/917992655467?text=Hi%2C%20I%20came%20from%20the%20website.%20I%20just%20need%20someone%20to%20talk%20to." 
+                   class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
+                    <ion-icon name="logo-whatsapp"></ion-icon>
+                    <span class="btn-text">Text Echo Care</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- PRIVACY SHIELD BOX -->
+        <section class="bento-box privacy-box delay-1 fade-in-up">
+            <div class="p-header">
+                <ion-icon name="shield-checkmark" class="shield-icon"></ion-icon>
+                <h2>100% Anonymous</h2>
+            </div>
+            <p>Zero human inboxes. We never log or sell your identity data. Your emotional privacy is encrypted at the core layer.</p>
+        </section>
+
+        <!-- TESTIMONIALS SLIDER BOX -->
+        <section class="bento-box testimonials-box delay-2 fade-in-up">
+            <h2>Wall of Love</h2>
+            <div class="testimonial-slider">
+                <div class="slide active">
+                    <p class="quote">"It's like journaling, but someone is actually validating my anxiety. It grounded me fast."</p>
+                    <span class="author">— Software Engineer, 26</span>
                 </div>
-                <h1 class="hero-title">The city is loud.<br><span class="highlight">Your room is quiet.</span><br>Let's talk.</h1>
-                <p class="hero-subtitle">
-                    A professional, empathetic listener in your pocket. No judgment, just pure connection whenever you need to vent.
-                </p>
-                <div class="cta-container">
-                    <a href="https://wa.me/917992655467?text=Hi%2C%20I%20came%20from%20the%20website.%20I%20just%20need%20someone%20to%20talk%20to." 
-                       class="whatsapp-btn" 
-                       target="_blank" 
-                       rel="noopener noreferrer">
-                        <ion-icon name="logo-whatsapp"></ion-icon>
-                        <span class="btn-text">Connect Instantly on WhatsApp</span>
-                    </a>
+                <div class="slide">
+                    <p class="quote">"I just moved here and didn't know anyone. A 5-minute vent session with this bot saved my night."</p>
+                    <span class="author">— Anonymous, 24</span>
+                </div>
+                <div class="slide">
+                    <p class="quote">"No downloads, no loading screens. It literally feels like texting a deeply empathetic friend."</p>
+                    <span class="author">— Designer, Delhi</span>
                 </div>
             </div>
         </section>
 
-        <!-- Product Empathy Features -->
-        <section class="empathy-section" id="why">
-            <h2 class="section-title reveal">Because being human is exhausting.</h2>
-            <div class="benefits-grid">
-                <div class="glass-card feature-card reveal">
-                    <div class="icon-circle">🌙</div>
-                    <h3>Always Awake</h3>
-                    <p>Whether it's 2 PM or 3 AM, whenever the isolation hits, we're a text away.</p>
+        <!-- MINI FAQ ACCORDION BOX -->
+        <section class="bento-box faq-box delay-3 fade-in-up">
+            <h2>Common Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question">Is it a human? <ion-icon name="chevron-down"></ion-icon></button>
+                    <div class="faq-answer"><p>No. It is a highly tuned AI therapist.</p></div>
                 </div>
-                <div class="glass-card feature-card reveal delay-1">
-                    <div class="icon-circle">🧘‍♀️</div>
-                    <h3>Zero Judgement</h3>
-                    <p>No pretenses. No masking. We are programmed strictly for empathy.</p>
-                </div>
-                <div class="glass-card feature-card reveal delay-2">
-                    <div class="icon-circle">📱</div>
-                    <h3>Frictionless</h3>
-                    <p>No new apps to install. No profiles to set up. Just a WhatsApp chat.</p>
+                <div class="faq-item">
+                    <button class="faq-question">Is it free? <ion-icon name="chevron-down"></ion-icon></button>
+                    <div class="faq-answer"><p>100% free. No hidden paywalls.</p></div>
                 </div>
             </div>
-        </section>
-
-        <!-- Security / Privacy Shield -->
-        <section class="privacy-section reveal" id="safeguard">
-            <div class="glass-card privacy-card">
-                 <ion-icon name="shield-checkmark" class="shield-icon"></ion-icon>
-                 <h2>Your Safe Space. Encrypted.</h2>
-                 <p class="privacy-note">We understand the vulnerability of opening up.</p>
-                 <div class="privacy-grid">
-                      <div class="p-item">
-                          <ion-icon name="eye-off"></ion-icon>
-                          <h4>Zero Human Inboxes</h4>
-                          <p>No human will ever read your private texts. It's just you and Echo Care.</p>
-                      </div>
-                      <div class="p-item">
-                          <ion-icon name="lock-closed"></ion-icon>
-                          <h4>Fully Anonymous</h4>
-                          <p>We do not sell data profiles. We don't trace identity.</p>
-                      </div>
-                 </div>
-            </div>
-        </section>
-
-        <!-- Wall of Love (Testimonials) -->
-        <section class="testimonials-section" id="proof">
-             <h2 class="section-title reveal" style="margin-bottom: 2rem;">People are using it right now.</h2>
-             <div class="testimonial-grid reveal">
-                  <div class="testi-card">
-                       <p class="quote">"I just moved to Bangalore and didn't know anyone. A 5-minute vent session with this bot genuinely grounded me before sleep."</p>
-                       <span class="author">— Anonymous, 24</span>
-                  </div>
-                  <div class="testi-card">
-                       <p class="quote">"Sometimes I overthink at 3 AM. Texting this feels like journaling, but someone is actually validating my anxiety. It's wild."</p>
-                       <span class="author">— Software Engineer</span>
-                  </div>
-                  <div class="testi-card">
-                       <p class="quote">"No app downloads, no loading screens. It literally feels like texting a deeply empathetic friend who's always free."</p>
-                       <span class="author">— Designer, Delhi</span>
-                  </div>
-             </div>
-        </section>
-
-        <!-- Frictionless Funnel Steps -->
-        <section class="how-it-works-section" id="how">
-            <h2 class="section-title reveal">How it works</h2>
-            <div class="steps-container reveal">
-                <div class="step-line"></div>
-                <div class="step">
-                    <div class="step-num">1</div>
-                    <div class="step-content">
-                        <h3>Click the Button</h3>
-                        <p>Open the chat directly inside your WhatsApp application.</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-num">2</div>
-                    <div class="step-content">
-                        <h3>Break the Ice</h3>
-                        <p>Send the automated message or just say anything that's on your mind.</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-num">3</div>
-                    <div class="step-content">
-                        <h3>Start Healing</h3>
-                        <p>Receive an instant, empathetic reply from your Echo. It's that simple.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="bottom-cta reveal">
-                 <a href="https://wa.me/917992655467?text=Hi%2C%20I%20came%20from%20the%20website.%20I%20just%20need%20someone%20to%20talk%20to." class="whatsapp-btn secondary" target="_blank">
-                     <ion-icon name="chatbubbles"></ion-icon>
-                     Try it right now
-                 </a>
-            </div>
-        </section>
-
-        <!-- Quick FAQ Accordion -->
-        <section class="faq-section reveal" id="faq">
-             <h2 class="section-title">Frequently Asked Questions</h2>
-             <div class="faq-container">
-                  <div class="faq-item">
-                       <button class="faq-question">Wait, is this a real human? <ion-icon name="chevron-down"></ion-icon></button>
-                       <div class="faq-answer"><p>No, Echo Care is a deeply tuned AI backend programmed strictly to listen, validate, and simulate a professional empathetic listener.</p></div>
-                  </div>
-                  <div class="faq-item">
-                       <button class="faq-question">Will I be judged for what I vent about? <ion-icon name="chevron-down"></ion-icon></button>
-                       <div class="faq-answer"><p>Absolutely not. The intelligence is physically incapable of judgment. It provides 100% unconditional positive regard to anything you type.</p></div>
-                  </div>
-                  <div class="faq-item">
-                       <button class="faq-question">Who reads my messages? <ion-icon name="chevron-down"></ion-icon></button>
-                       <div class="faq-answer"><p>Nobody! Your texts hit our automated local server, calculate an empathic reply, and dispatch it instantly. There is zero human intervention.</p></div>
-                  </div>
-             </div>
         </section>
 
     </main>
 
-    <footer class="glass-footer reveal">
+    <footer class="glass-footer">
         <p>&copy; 2026 Echo Care AI</p>
-        <p class="footer-sub">Built for the culture. Scaled with empathy.</p>
     </footer>
 
     <script src="script.js"></script>
