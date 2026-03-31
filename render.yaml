@@ -1,0 +1,16 @@
+services:
+  # The WhatsApp AI Engine Background Worker
+  - type: worker
+    name: echo-care-engine
+    env: node
+    buildCommand: cd backend-service && npm install
+    startCommand: cd backend-service && node index.js
+    # Running on the free tier (512MB RAM)
+    plan: free
+    envVars:
+      - key: DATABASE_URL
+        sync: false # User will paste their free Supabase URL here in the Render Dashboard
+      - key: GEMINI_API_KEY
+        sync: false # User will paste their AI API Key here
+      - key: BOT_NUMBER
+        value: "7992655467"
