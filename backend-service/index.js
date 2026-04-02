@@ -22,7 +22,7 @@ const sqlite3 = require('sqlite3').verbose();
 require('dotenv').config();
 
 // ENVIRONMENT & TUNING CONFIGURATION
-const DELAY_MS = 1500; // Simulates human "typing..." latency naturally
+const DELAY_MS = 500; // Simulates human "typing..." latency naturally
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || ''; 
 const DATABASE_URL = process.env.DATABASE_URL || ''; 
 
@@ -113,7 +113,7 @@ const getHistory = async (userId, limit = 6) => {
 let personaRules = "You are an AI therapist. Validate feelings and ask extremely brief questions.";
 try {
     // Read the remote configuration layer without blocking runtime
-    personaRules = fs.readFileSync('./persona.txt', 'utf8');
+    personaRules = fs.readFileSync('backend-service/persona.txt', 'utf8');
 } catch (e) {
     console.warn("[WARN] Cloud Persona configuration missing. Using local defaults.");
 }
@@ -142,7 +142,7 @@ const client = new Client({
 
 client.on('qr', (qr) => {
     // Output terminal QR. (Must view Cloud Console logs exactly once upon remote deploy to scan)
-    qrcode.generate(qr, { small: true }); require("qrcode").toFile("./qr-code-to-scan.png", qr, {color: {dark: "#000000", light: "#FFFFFF"}});
+    qrcode.generate(qr, { small: true }); require("qrcode").toFile("../qr-code-to-scan.png", qr, {color: {dark: "#000000", light: "#FFFFFF"}});
     console.log("[SYSTEM] Pending initial auth link. Scan QR in Cloud Console.");
 });
 
@@ -155,7 +155,7 @@ client.on('ready', () => {
 // ==========================================
 // 5. THE SYNCHRONOUS ROUTING PIPELINE
 // ==========================================
-client.on('message_create', async (msg) => {
+client.on('message', async (msg) => {
     // Drop system messages or group blasts
     if (msg.from === 'status@broadcast' || msg.id.fromMe || msg.isGroupMsg) return;
 
