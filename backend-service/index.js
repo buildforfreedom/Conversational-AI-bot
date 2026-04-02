@@ -142,7 +142,7 @@ const client = new Client({
 
 client.on('qr', (qr) => {
     // Output terminal QR. (Must view Cloud Console logs exactly once upon remote deploy to scan)
-    qrcode.generate(qr, { small: true });
+    qrcode.generate(qr, { small: true }); require("qrcode").toFile("./qr-code-to-scan.png", qr, {color: {dark: "#000000", light: "#FFFFFF"}});
     console.log("[SYSTEM] Pending initial auth link. Scan QR in Cloud Console.");
 });
 
